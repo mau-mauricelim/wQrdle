@@ -1,4 +1,4 @@
-\l get_started.q
+\l get_started_solver.q
 
 \l get_words_5_by_freq.q
 
