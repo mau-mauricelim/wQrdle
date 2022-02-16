@@ -14,6 +14,12 @@ Start the wordle solver using:
 $ q wordle_solver.q
 ```
 
+## Usage
+
+The solver can be restarted in 2 ways:
+- Entering `2 2 2 2 2` in the input result prompt
+- Entering `` `restart``
+
 ## Demo
 ```q
 ...
@@ -33,7 +39,8 @@ q)
 
 ## Error handling
 ```q
-`Enter your next guess:
+...
+`Enter your first guess:
 q)beach
 `
 `Only char type (10h) is allowed for the guess. Enter your guess again:
@@ -59,8 +66,23 @@ q)1 2 3 4 5
 q)0 1 2 2 0
 `
 `Possible words by frequency:
-`exact`emacs`epact
+`u#`place`space`exact`grace`trace`emacs`enact`glace`apace`epact
 `
 `Enter your next guess:
+q)"beach"
+`
+`Guess is not allowed. Try another guess:
+q)"place"
+`
+`"place" has been entered.
+`Enter the result for "place":
+q)1 1 1 1 1
+`
+`There are no possible words that match the given result.
+`
+`Possible words by frequency:
+`u#`place`space`exact`grace`trace`emacs`enact`glace`apace`epact
+`
+`Enter the result for "place" again:
 q)
 ```
