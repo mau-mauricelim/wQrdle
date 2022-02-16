@@ -18,7 +18,7 @@ $ q wordle_solver.q
 
 The solver can be restarted in 2 ways:
 - Entering `2 2 2 2 2` in the input result prompt
-- Entering `` `restart``
+- Entering `` `restart`` in the q prompt
 
 ## Demo
 ```q
