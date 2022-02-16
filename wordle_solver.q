@@ -4,10 +4,20 @@
 
 \l functions.q
 
-`$"Enter your first guess: "
-guess:enlist""
+0N!`$"Enter your first guess: ";
+guess:enlist"";
 .z.pi:{
     x:@[value;x;guess];
+    /restart solver
+    if[`restart~x;
+        0N!`;
+        0N!`$"Restarting solver...";
+        system"l get_words_5_by_freq.q";
+        0N!`;
+        0N!`$"Enter your first guess: ";
+        `guess set enlist"";
+        ;:()];
+
     if[guess~enlist"";
         $[10h~type x;
             $[5=sum x in .Q.a;
@@ -31,8 +41,20 @@ guess:enlist""
     $[7h~type x;
         $[5=count x;
             $[all x within(0;2);
-                [f[guess 0;x];`guess set enlist"";
-                    0N!`;0N!`$"Enter your next guess: ";:()
+                [re:f[guess 0;x];
+                    $[re=0;
+                        err:"";
+                        $[re=1;
+                            [system"l get_words_5_by_freq.q";
+                                0N!`;
+                                0N!`$"Enter your first guess: ";
+                                `guess set enlist"";
+                                ;:()];
+                            [`guess set enlist"";
+                                0N!`;
+                                0N!`$"Enter your next guess: ";
+                                :()]]
+                        ];
                     ];
                 err:"All result items must be within 0 and 2. "
                 ];

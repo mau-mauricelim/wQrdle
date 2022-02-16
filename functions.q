@@ -22,7 +22,25 @@ f:{[guess;place]
         r:@[enlist each perms;pos;:;regexclpos1 where b];
         r:@[enlist each guess;wnb2;:;r];
         ssr[raze r;"?";regexcl]}[;place;regexclpos1;wnb2;guess;regexcl]each perms;
-    / display remaining words
+    / new list
+    words_5_by_freq_new:`u#words_5_by_freq where max words_5_by_freq like/:regexs;
+    / result error
+    if[0=count words_5_by_freq_new;
+        0N!`;
+        0N!`$"There are no possible words that match the given result. ";
+        0N!`;
+        0N!`$"Possible words by frequency: ";
+        0N!words_5_by_freq;
+        :0];
+    / result found
+    if[1=count words_5_by_freq_new;
+        0N!`;
+        0N!`$"Well done! \"",string[words_5_by_freq_new 0],"\" is the correct answer.";
+        0N!`;
+        0N!`$"Restarting solver...";
+        :1];
+    / display new list
     0N!`;
     0N!`$"Possible words by frequency: ";
-    `words_5_by_freq set 0N!words_5_by_freq where max words_5_by_freq like/:regexs;}
+    `words_5_by_freq set 0N!words_5_by_freq_new;
+    :2}
