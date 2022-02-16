@@ -1,10 +1,12 @@
-# wQrdle solver
+# wQrdle solver and game
 
-Wordle solver using kdb+/q
+Wordle solver and game using kdb+/q
 
 ## Requirements
 
 - kdb+
+
+# wQrdle solver
 
 ## Getting started
 
@@ -20,7 +22,7 @@ The solver can be restarted in 2 ways:
 - Entering `2 2 2 2 2` in the input result prompt
 - Entering `` `restart`` in the q prompt
 
-## Demo
+### Demo
 ```q
 ...
 `Enter your first guess:
@@ -37,7 +39,7 @@ q)1 0 2 0 1
 q)
 ```
 
-## Error handling
+### Error handling
 ```q
 ...
 `Enter your first guess:
@@ -84,5 +86,68 @@ q)1 1 1 1 1
 `u#`place`space`exact`grace`trace`emacs`enact`glace`apace`epact
 `
 `Enter the result for "place" again:
+q)
+```
+
+# wQrdle game
+
+## Getting started
+
+Start the wordle game using:
+
+```bash
+$ q wordle_game.q
+```
+
+## Usage
+
+The game can be restarted in 2 ways:
+- Entering the correct answer
+- Entering `` `restart`` in the q prompt
+
+The correct answer can be revealed by:
+- Entering `` `answer`` in the q prompt
+
+### Demo
+```q
+...
+`Enter your first guess:
+q)"crane"
+guess  | place
+-------| ---------
+"crane"| 2 1 1 0 1
+`
+`Enter your next guess:
+q)"cager"
+guess  | place
+-------| ---------
+"crane"| 2 1 1 0 1
+"cager"| 2 2 0 2 1
+`
+`Enter your next guess:
+q)"caret"
+guess  | place
+-------| ---------
+"crane"| 2 1 1 0 1
+"cager"| 2 2 0 2 1
+"caret"| 2 2 2 2 0
+`
+`Enter your next guess:
+q)`answer
+`
+`Revealing answer...
+`
+guess  | place
+-------| ---------
+"crane"| 2 1 1 0 1
+"cager"| 2 2 0 2 1
+"caret"| 2 2 2 2 0
+`
+`The correct answer is: "cared"
+q)`restart
+`
+`Restarting game...
+`
+`Enter your first guess:
 q)
 ```
