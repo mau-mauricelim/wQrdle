@@ -2,9 +2,10 @@
 
 -1 each read0`:get_started/get_started_solver.txt;
 
-\l get_words_5_by_freq.q
+get_words_5_by_freq:{system"l utils/get_words_5_by_freq.q"};
+get_words_5_by_freq[];
 
-\l functions.q
+\l utils/functions.q
 
 0N!`$"Enter your first guess: ";
 guess:enlist"";
@@ -14,7 +15,7 @@ guess:enlist"";
     if[`restart~x;
         0N!`;
         0N!`$"Restarting solver...";
-        system"l get_words_5_by_freq.q";
+        get_words_5_by_freq[];
         0N!`;
         0N!`$"Enter your first guess: ";
         `guess set enlist"";
@@ -47,7 +48,7 @@ guess:enlist"";
                     $[re=0;
                         err:"";
                         $[re=1;
-                            [system"l get_words_5_by_freq.q";
+                            [get_words_5_by_freq[];
                                 0N!`;
                                 0N!`$"Enter your first guess: ";
                                 `guess set enlist"";
