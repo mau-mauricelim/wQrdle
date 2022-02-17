@@ -3,13 +3,14 @@
 / set "random" seed based on time
 system"S ",string`int$.z.t;
 
--1 each read0`:get_started/get_started_game.txt;
+-1 read0`:get_started/get_started_game.txt;
 
 \l utils/get_words_5_by_freq.q
+\l utils/prompt.q
 
 answer:string rand words_5_by_freq;
 
-0N!`$"Enter your first guess: ";
+prompt"Enter your first guess: ";
 result:();
 .z.pi:{
     /error trap
@@ -17,22 +18,17 @@ result:();
 
     /restart game
     if[`restart~guess;
-        0N!`;
-        0N!`$"Restarting game...";
+        prompt"Restarting game...";
         `answer set string rand words_5_by_freq;
-        0N!`;
-        0N!`$"Enter your first guess: ";
+        prompt"Enter your first guess: ";
         `result set();
         :()];
     
     /reveal answer
     if[`answer~guess;
-        0N!`;
-        0N!`$"Revealing answer...";
-        0N!`;
-        show result;
-        0N!`;
-        0N!`$"The correct answer is: \"",answer,"\"";
+        prompt"Revealing answer...";
+        -1"";show result;
+        prompt"The correct answer is: \"",answer,"\"";
         :()];
 
     $[not""~guess;
@@ -42,18 +38,15 @@ result:();
                     [place:@[`long$guess in answer;where guess=answer;:;2];
                         `result upsert([guess:enlist guess] place:enlist place);
                         show result;
-                        0N!`;
                         /correct answer
                         if[all place=2;
-                            0N!`$"Well done! \"",string[guess 0],"\" is the correct answer.";
-                            0N!`;
-                            0N!`$"Restarting game...";
-                            0N!`;
+                            prompt"Well done! \"",string[guess 0],"\" is the correct answer.";
+                            prompt"Restarting game...";
                             `answer set string rand words_5_by_freq;
-                            0N!`$"Enter your first guess: ";
+                            prompt"Enter your first guess: ";
                             `result set();
                             :()];
-                        0N!`$"Enter your next guess: ";
+                        prompt"Enter your next guess: ";
                         :()];
                     err:"Guess is not allowed. Try another guess: "
                     ];
@@ -64,7 +57,6 @@ result:();
         err:"Only char type (10h) is allowed for the guess. Enter your guess again: "
         ];
 
-    show result;
-    0N!`;
-    0N!`$err;
+    -1"";show result;
+    prompt err;
     }

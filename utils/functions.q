@@ -1,3 +1,5 @@
+/ load the function from root
+\l utils/prompt.q
 / https://code.kx.com/phrases/math/#permutations
 / distinct permutation function
 perm:{distinct(1 0#x){raze(1 rotate)scan'x,'y}/x}
@@ -26,21 +28,16 @@ f:{[guess;place]
     words_5_by_freq_new:`u#words_5_by_freq where max words_5_by_freq like/:regexs;
     / result error
     if[0=count words_5_by_freq_new;
-        0N!`;
-        0N!`$"There are no possible words that match the given result. ";
-        0N!`;
-        0N!`$"Possible words by frequency: ";
+        prompt"There are no possible words that match the given result. ";
+        prompt"Possible words by frequency: ";
         0N!words_5_by_freq;
         :0];
     / result found
     if[1=count words_5_by_freq_new;
-        0N!`;
-        0N!`$"Well done! \"",string[words_5_by_freq_new 0],"\" is the correct answer.";
-        0N!`;
-        0N!`$"Restarting solver...";
+        prompt"Well done! \"",string[words_5_by_freq_new 0],"\" is the correct answer.";
+        prompt"Restarting solver...";
         :1];
     / display new list
-    0N!`;
-    0N!`$"Possible words by frequency: ";
+    prompt"Possible words by frequency: ";
     `words_5_by_freq set 0N!words_5_by_freq_new;
     :2}

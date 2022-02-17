@@ -30,4 +30,3 @@
 | 1 | The letter is in the word but in the wrong spot   |
 | 0 | The letter is not in the word in any spot         |
 +-------------------------------------------------------+
-
