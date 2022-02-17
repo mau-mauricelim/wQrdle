@@ -12,6 +12,7 @@ answer:string rand words_5_by_freq;
 
 prompt"Enter your first guess: ";
 result:();
+show_result:{-1"";show result;};
 .z.pi:{
     /error trap
     guess:@[value;x;""];
@@ -27,7 +28,7 @@ result:();
     /reveal answer
     if[`answer~guess;
         prompt"Revealing answer...";
-        -1"";show result;
+        show_result[];
         prompt"The correct answer is: \"",answer,"\"";
         :()];
 
@@ -37,7 +38,7 @@ result:();
                 $[(`$guess)in words_5_by_freq;
                     [place:@[`long$guess in answer;where guess=answer;:;2];
                         `result upsert([guess:enlist guess] place:enlist place);
-                        show result;
+                        show_result[];
                         /correct answer
                         if[all place=2;
                             prompt"Well done! \"",string[guess 0],"\" is the correct answer.";
@@ -57,6 +58,6 @@ result:();
         err:"Only char type (10h) is allowed for the guess. Enter your guess again: "
         ];
 
-    -1"";show result;
+    show_result[];
     prompt err;
     }
