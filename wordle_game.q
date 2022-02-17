@@ -1,7 +1,9 @@
+\c 25 200
+
 / set "random" seed based on time
 system"S ",string`int$.z.t
 
-\l get_started_game.q
+-1 each read0`:get_started_game.txt;
 
 \l get_words_5_by_freq.q
 

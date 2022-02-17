@@ -1,4 +1,6 @@
-\l get_started_solver.q
+\c 25 200
+
+-1 each read0`:get_started_solver.txt;
 
 \l get_words_5_by_freq.q
 
