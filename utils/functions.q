@@ -31,13 +31,12 @@ f:{[guess;place]
         prompt"There are no possible words that match the given result.";
         prompt"Possible words by frequency:";
         0N!words_5_by_freq;
-        :0];
+        :`error];
     / result found
     if[1=count words_5_by_freq_new;
         prompt"Well done! \"",string[words_5_by_freq_new 0],"\" is the correct answer.";
-        prompt"Restarting solver...";
-        :1];
+        :`found];
     / display new list
     prompt"Possible words by frequency:";
     `words_5_by_freq set 0N!words_5_by_freq_new;
-    :2}
+    }

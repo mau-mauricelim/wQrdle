@@ -9,7 +9,8 @@ system"S ",string`int$.z.t;
 \l utils/prompt.q
 
 error_messages:`error xkey("S*";enlist",")0:`:data/error_messages.csv;
-start_game:{
+start_game:{[restart]
+    if[restart;prompt"Restarting game..."];
     / set random answer
     `answer set string rand words_5_by_freq;
     / initialize result
@@ -18,16 +19,13 @@ start_game:{
     };
 show_result:{-1"";show result;};
 
-start_game[];
+start_game 0;
 .z.pi:{
     / error trap
     guess:@[value;x;""];
 
     / restart game
-    if[`restart~guess;
-        prompt"Restarting game...";
-        start_game[];
-        :()];
+    if[`restart~guess;start_game 1;:()];
     
     / reveal answer
     if[`answer~guess;
@@ -46,9 +44,7 @@ start_game[];
             `]
         ]`message;
 
-    if[count error;
-        show_result[];
-        prompt error;:()];
+    if[count error;show_result[];prompt error;:()];
 
     / guess entered successfully
     place:@[`long$guess in answer;where guess=answer;:;2];
@@ -58,9 +54,8 @@ start_game[];
     / correct answer
     if[all place=2;
         prompt"Well done! \"",string[guess 0],"\" is the correct answer.";
-        prompt"Restarting game...";
-        start_game[];
+        start_game 1;
         :()];
-        
+
     prompt"Enter your next guess:";
     }
