@@ -4,7 +4,7 @@ Wordle solver and game using kdb+/q
 
 ## Requirements
 
-- kdb+
+- [kdb+](https://code.kx.com/q/learn/install/)
 
 # wQrdle solver
 
