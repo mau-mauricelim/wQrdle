@@ -8,15 +8,15 @@ get_words_5_by_freq[];
 \l utils/functions.q
 \l utils/prompt.q
 
-prompt"Enter your first guess: ";
+prompt"Enter your first guess:";
 guess:enlist"";
 .z.pi:{
     x:@[value;x;guess];
-    /restart solver
+    / restart solver
     if[`restart~x;
         prompt"Restarting solver...";
         get_words_5_by_freq[];
-        prompt"Enter your first guess: ";
+        prompt"Enter your first guess:";
         `guess set enlist"";
         ;:()];
 
@@ -26,15 +26,15 @@ guess:enlist"";
                 $[(`$x)in words_5_by_freq;
                     [`guess set enlist x;
                         fmtguess:"\"",guess[0],"\"";
-                        prompt fmtguess," has been entered. ";
-                        prompt"Enter the result for ",fmtguess,": ";
+                        prompt fmtguess," has been entered.";
+                        prompt"Enter the result for ",fmtguess,":";
                         :();
                         ];
-                    [prompt"Guess is not allowed. Try another guess: ";:()]
+                    [prompt"Guess is not allowed. Try another guess:";:()]
                     ];
-                [prompt"Please enter a 5-letter word guess: ";:()]
+                [prompt"Please enter a 5-letter word guess:";:()]
                 ];
-            [prompt"Only char type (10h) is allowed for the guess. Enter your guess again: ";:()]
+            [prompt"Only char type (10h) is allowed for the guess. Enter your guess again:";:()]
             ]
         ];
 
@@ -47,19 +47,19 @@ guess:enlist"";
                         err:"";
                         $[re=1;
                             [get_words_5_by_freq[];
-                                prompt"Enter your first guess: ";
+                                prompt"Enter your first guess:";
                                 `guess set enlist"";
                                 ;:()];
                             [`guess set enlist"";
-                                prompt"Enter your next guess: ";
+                                prompt"Enter your next guess:";
                                 :()]]
                         ];
                     ];
-                err:"All result items must be within 0 and 2. ";
+                err:"All result items must be within 0 and 2.";
                 ];
-            err:"The result must be a list of length 5. ";
+            err:"The result must be a list of length 5.";
             ];
-        err:"Only long type (7h) is allowed for the result. ";
+        err:"Only long type (7h) is allowed for the result.";
         ];
-    prompt err,"Enter the result for ",fmtguess," again: ";
+    prompt err,"Enter the result for ",fmtguess," again:";
     }

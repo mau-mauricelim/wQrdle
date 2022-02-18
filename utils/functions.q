@@ -28,8 +28,8 @@ f:{[guess;place]
     words_5_by_freq_new:`u#words_5_by_freq where max words_5_by_freq like/:regexs;
     / result error
     if[0=count words_5_by_freq_new;
-        prompt"There are no possible words that match the given result. ";
-        prompt"Possible words by frequency: ";
+        prompt"There are no possible words that match the given result.";
+        prompt"Possible words by frequency:";
         0N!words_5_by_freq;
         :0];
     / result found
@@ -38,6 +38,6 @@ f:{[guess;place]
         prompt"Restarting solver...";
         :1];
     / display new list
-    prompt"Possible words by frequency: ";
+    prompt"Possible words by frequency:";
     `words_5_by_freq set 0N!words_5_by_freq_new;
     :2}

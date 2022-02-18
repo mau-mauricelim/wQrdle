@@ -8,56 +8,59 @@ system"S ",string`int$.z.t;
 \l utils/get_words_5_by_freq.q
 \l utils/prompt.q
 
-answer:string rand words_5_by_freq;
-
-prompt"Enter your first guess: ";
-result:();
+error_messages:`error xkey("S*";enlist",")0:`:data/error_messages.csv;
+start_game:{
+    / set random answer
+    `answer set string rand words_5_by_freq;
+    / initialize result
+    `result set();
+    prompt"Enter your first guess:";
+    };
 show_result:{-1"";show result;};
+
+start_game[];
 .z.pi:{
-    /error trap
+    / error trap
     guess:@[value;x;""];
 
-    /restart game
+    / restart game
     if[`restart~guess;
         prompt"Restarting game...";
-        `answer set string rand words_5_by_freq;
-        prompt"Enter your first guess: ";
-        `result set();
+        start_game[];
         :()];
     
-    /reveal answer
+    / reveal answer
     if[`answer~guess;
         prompt"Revealing answer...";
         show_result[];
         prompt"The correct answer is: \"",answer,"\"";
         :()];
 
-    $[not""~guess;
-        $[(not x in string key`.)&10h~type guess;
-            $[5=sum guess in .Q.a;
-                $[(`$guess)in words_5_by_freq;
-                    [place:@[`long$guess in answer;where guess=answer;:;2];
-                        `result upsert([guess:enlist guess] place:enlist place);
-                        show_result[];
-                        /correct answer
-                        if[all place=2;
-                            prompt"Well done! \"",string[guess 0],"\" is the correct answer.";
-                            prompt"Restarting game...";
-                            `answer set string rand words_5_by_freq;
-                            prompt"Enter your first guess: ";
-                            `result set();
-                            :()];
-                        prompt"Enter your next guess: ";
-                        :()];
-                    err:"Guess is not allowed. Try another guess: "
-                    ];
-                err:"Please enter a 5-letter word guess: "
-                ];
-            err:"Only char type (10h) is allowed for the guess. Enter your guess again: "
-            ];
-        err:"Only char type (10h) is allowed for the guess. Enter your guess again: "
-        ];
+    / error trapped OR variable name is entered OR not correct type
+    error:error_messages[
+        $[(""~guess)|(x in string key`.)|not 10h~type guess;`guess_type;
+            / check length
+            5<>sum guess in .Q.a;`guess_length;
+            / check word
+            not(`$guess)in words_5_by_freq;`guess_word;
+            `]
+        ]`message;
 
+    if[count error;
+        show_result[];
+        prompt error;:()];
+
+    / guess entered successfully
+    place:@[`long$guess in answer;where guess=answer;:;2];
+    `result upsert([guess:enlist guess] place:enlist place);
     show_result[];
-    prompt err;
+
+    / correct answer
+    if[all place=2;
+        prompt"Well done! \"",string[guess 0],"\" is the correct answer.";
+        prompt"Restarting game...";
+        start_game[];
+        :()];
+        
+    prompt"Enter your next guess:";
     }
