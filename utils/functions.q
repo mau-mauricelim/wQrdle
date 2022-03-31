@@ -4,7 +4,7 @@
 / distinct permutation function
 perm:{distinct(1 0#x){raze(1 rotate)scan'x,'y}/x}
 / regex type solver
-f:{[guess;place]
+f:{[guess;place;hardmode]
     bools:place=/:til 3;
     / possible position for 1 - can go to another 1 or 0
     wrongpos:guess where bool1:bools 1;
@@ -24,8 +24,11 @@ f:{[guess;place]
         r:@[enlist each perms;pos;:;regexclpos1 where b];
         r:@[enlist each guess;wnb2;:;r];
         ssr[raze r;"?";regexcl]}[;place;regexclpos1;wnb2;guess;regexcl]each perms;
+
     / new list
-    words_5_by_freq_new:`u#words_5_by_freq where max words_5_by_freq like/:regexs;
+    words_5_by_freq_new:`u#$[hardmode;
+        words_5_by_freq where max words_5_by_freq like/:regexs;
+        words_5_by_freq inter words_5_by_freq_orig where max words_5_by_freq_orig like/:regexs];
     / result error
     if[0=count words_5_by_freq_new;
         prompt"There are no possible words that match the given result.";

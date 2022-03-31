@@ -1,0 +1,7 @@
+error,message
+guess_type,"Only char type (10h) is allowed for the guess. Enter your guess again:"
+guess_length,"Please enter a 5-letter word guess:"
+guess_word,"Guess is not allowed. Try another guess:"
+result_type,"Only long type (7h) is allowed for the result."
+result_length,"The result must be a list of length 5."
+result_bounds,"All result items must be within 0 and 2."

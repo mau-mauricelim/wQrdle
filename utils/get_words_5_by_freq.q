@@ -14,4 +14,4 @@ allowed_words:`$read0`:../data/allowed_words.txt
 \
 
 / load the data from root
-words_5_by_freq:get`:data/words_5_by_freq
+words_5_by_freq_orig:words_5_by_freq:get`:data/words_5_by_freq

@@ -16,6 +16,12 @@ Start the wordle solver using:
 $ q wordle_solver.q
 ```
 
+Hard Mode (any revealed hints must be used in subsequent guesses) can be enabled using:
+
+```bash
+$ q wordle_solver.q -hardmode
+```
+
 ## Usage
 
 The solver can be restarted in 2 ways:
@@ -33,7 +39,7 @@ Enter the result for "crane":
 q)1 0 2 0 1
 
 Possible words by frequency:
-beach`exact`teach`emacs`peach`leach`epact`ecads
+`u#`beach`exact`teach`emacs`peach`leach`epact`ecads
 
 Enter your next guess:
 q)
