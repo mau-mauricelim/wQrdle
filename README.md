@@ -107,6 +107,12 @@ Start the wordle game using:
 $ q wordle_game.q
 ```
 
+Hard Mode (any revealed hints must be used in subsequent guesses) can be enabled using:
+
+```bash
+$ q wordle_game.q -hardmode
+```
+
 ## Usage
 
 The game can be restarted in 2 ways:
